@@ -65,7 +65,7 @@ def proteolysis_sites(seq: str, site_seq: str, site_seq_left: str, site_seq_righ
         indexes = []  # координаты сайтов протеолиза
         new_proteins = []  # новые части белка после протеолиза
         for prot in proteins:
-            if site_seq in prot:  # если сайт протеолиза если в последовательности белка (большими буквами)
+            if site_seq in prot:  # если сайт протеолиза есть в последовательности белка (большими буквами)
                 id = 0
                 for i in range(prot.count(site_seq)):
                     id += prot.index(site_seq) + len(site_seq_left)  # координата текущего сайта протеолиза
@@ -84,7 +84,7 @@ def proteolysis_sites(seq: str, site_seq: str, site_seq_left: str, site_seq_righ
         # пока есть хоть одна часть белка с последовательностью сайта протеолиза, работает функция proteolysis()
         proteins, indexes = proteolysis(proteins)
         step += 1
-        step_and_index[step] = indexes  # шаг и найдеденный сайты протеолиза
+        step_and_index[step] = indexes  # шаг и найдеденные сайты протеолиза
     else:
         if step_and_index:
             return step_and_index

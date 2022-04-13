@@ -1,10 +1,22 @@
+import sys
+import subprocess
+import pkg_resources
+
+required = {'biopython'}
+installed = {pkg.key for pkg in pkg_resources.working_set}
+missing = required - installed
+
+if missing:
+    python = sys.executable
+    subprocess.check_call([python, '-m', 'pip', 'install', *missing], stdout=subprocess.DEVNULL)
+
 from Bio.PDB import *
 from Bio.SeqUtils.ProtParam import ProteinAnalysis, ProtParamData
 
 
 def protein_seq_creator(pdb_name: str):
     pdbl = PDBList()
-    pdbl.retrieve_pdb_file(pdb_name)  # скачивание структуры белка в формате PDBx/mmCif
+    pdbl.retrieve_pdb_file(pdb_name, file_format='mmCif')  # скачивание структуры белка в формате PDBx/mmCif
 
     path = str(pdb_name[1:3].lower() + '/' + pdb_name.lower() + '.cif')  # путь до скаченного файла
     parser = MMCIFParser()
@@ -84,7 +96,11 @@ def proteolysis_sites(seq: str, site_seq: str, site_seq_left: str, site_seq_righ
         # пока есть хоть одна часть белка с последовательностью сайта протеолиза, работает функция proteolysis()
         proteins, indexes = proteolysis(proteins)
         step += 1
+<<<<<<< HEAD
         step_and_index[step] = indexes  # шаг и найдеденные сайты протеолиза
+=======
+        step_and_index[step] = indexes  # шаг и найденные сайты протеолиза
+>>>>>>> 13a0e61 (small additions and tests)
     else:
         if step_and_index:
             return step_and_index

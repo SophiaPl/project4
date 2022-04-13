@@ -96,11 +96,9 @@ def proteolysis_sites(seq: str, site_seq: str, site_seq_left: str, site_seq_righ
         # пока есть хоть одна часть белка с последовательностью сайта протеолиза, работает функция proteolysis()
         proteins, indexes = proteolysis(proteins)
         step += 1
-<<<<<<< HEAD
-        step_and_index[step] = indexes  # шаг и найдеденные сайты протеолиза
-=======
         step_and_index[step] = indexes  # шаг и найденные сайты протеолиза
->>>>>>> 13a0e61 (small additions and tests)
+        step_and_index[step] = indexes  # шаг и найденные сайты протеолиза
+
     else:
         if step_and_index:
             return step_and_index

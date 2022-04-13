@@ -97,7 +97,6 @@ def proteolysis_sites(seq: str, site_seq: str, site_seq_left: str, site_seq_righ
         proteins, indexes = proteolysis(proteins)
         step += 1
         step_and_index[step] = indexes  # шаг и найденные сайты протеолиза
-        step_and_index[step] = indexes  # шаг и найденные сайты протеолиза
 
     else:
         if step_and_index:

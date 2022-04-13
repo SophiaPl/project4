@@ -2,7 +2,7 @@ import unittest
 import project4
 import data_for_test
 
-class Prject4Test(unittest.TestCase):
+class Project4Test(unittest.TestCase):
     def test_protein_seq_creator(self):
         pdb_name = '7F5U'
         RE = project4.protein_seq_creator(pdb_name)

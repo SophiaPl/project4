@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+import argparse
 import sys
 import subprocess
 import pkg_resources
@@ -35,7 +38,7 @@ def surface_analysis(sequence: str):  # анализ структуры белк
     kd = prot.protein_scale(window=7, param_dict=ProtParamData.kd)  # Kyte & Doolittle index of hydrophobicity
     em = prot.protein_scale(window=7, param_dict=ProtParamData.em)  # Surface accessibility
     seq_cut = sequence[3:len(sequence) - 3]
-    # парметр window=7 задаёт длину окружения, в пределах которого считается гидрофобность/доступность
+    # параметр window=7 задаёт длину окружения, в пределах которого считается гидрофобность/доступность
     # поэтому первые и последние три остатка не анализируются
     seq_first3 = sequence[:3].upper()
     seq_last3 = sequence[-3:].upper()
@@ -106,13 +109,17 @@ def proteolysis_sites(seq: str, site_seq: str, site_seq_left: str, site_seq_righ
             # если в белке в принципе нет последовательности сайта протеолиза
 
 
-# временный блок, пока не пропишем cmd_args
 if __name__ == '__main__':
-    pdb = input('Input protein structure name on RCSB PDB: ')
-    protease_site = input('Input protease cleavage site in AA/AA format: ')
-
+    # pdb = input('Input protein structure name on RCSB PDB: ')
+    # protease_site = input('Input protease cleavage site in AA/AA format: ')
+    parser = argparse.ArgumentParser(description='project4 determines protein cleavage site presence'
+                                             ' at subsequent cleavage stages.')
+    parser.add_argument("-p", "--protein_name", help="protein structure name on RCSB PDB", type=str, required=True)
+    parser.add_argument("-a", "--protease_site", help="protease cleavage site in AA/AA format", type=str, required=True)
+    args = parser.parse_args()
+    pdb = args.protein_name
+    protease_site = args.protease_site
     pseq = protein_seq_creator(pdb)
     sseq, sseql, sseqr = site_seq_creator(protease_site)
-
     print(proteolysis_sites(pseq, sseq, sseql, sseqr))
 

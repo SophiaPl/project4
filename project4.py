@@ -115,7 +115,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='project4 determines protein cleavage site presence'
                                              ' at subsequent cleavage stages.')
     parser.add_argument("-p", "--protein_name", help="protein structure name on RCSB PDB", type=str, required=True)
-    parser.add_argument("-a", "--protease_site", help="protease cleavage site in AA/AA format", type=str, required=True)
+    parser.add_argument("-a", "--protease_site", help="protease cleavage site in AA/AA format, "
+                                                      "where AA - aminoacids and / cleavage point", type=str, required=True)
     args = parser.parse_args()
     pdb = args.protein_name
     protease_site = args.protease_site
